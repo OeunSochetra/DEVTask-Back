@@ -1,0 +1,21 @@
+[
+    { "id": 1, "name": "C#" },
+    { "id": 2, "name": "C++" },
+    { "id": 3, "name": "Flutter" },
+    { "id": 4, "name": "HTML/CSS" },
+    { "id": 5, "name": "Java" },
+    { "id": 6, "name": "JavaScript" },
+    { "id": 7, "name": "Kotlin" },
+    { "id": 8, "name": "Machine Learning" },
+    { "id": 9, "name": "Next.js" },
+    { "id": 10, "name": "Node.js" },
+    { "id": 11, "name": "PHP" },
+    { "id": 12, "name": "Python" },
+    { "id": 13, "name": "React" },
+    { "id": 14, "name": "React Native" },
+    { "id": 15, "name": "Ruby on Rails" },
+    { "id": 16, "name": "SQL" },
+    { "id": 17, "name": "SwiftUI" },
+    { "id": 18, "name": "TypeScript" }
+  ]
+  
