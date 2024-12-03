@@ -1,0 +1,32 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const mongodb_1 = require("./services/mongodb");
+const featureJobRoute_1 = __importDefault(require("./routes/featureJobRoute"));
+const spotlightRoute_1 = __importDefault(require("./routes/spotlightRoute"));
+const programLangRoute_1 = __importDefault(require("./routes/programLangRoute"));
+const boardRoute_1 = __importDefault(require("./routes/boardRoute"));
+const mediaRoute_1 = __importDefault(require("./routes/mediaRoute"));
+const privacyPolicyRoute_1 = __importDefault(require("./routes/privacyPolicyRoute"));
+const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+(0, mongodb_1.connectDB)();
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cors_1.default)());
+app.use("/api", featureJobRoute_1.default);
+app.use("/api", spotlightRoute_1.default);
+app.use("/api", programLangRoute_1.default);
+app.use("/api", boardRoute_1.default);
+app.use("/api", mediaRoute_1.default);
+app.use("/api", privacyPolicyRoute_1.default);
+app.get("/", (req, res) => res.send("Express on Vercel"));
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+module.exports = app;
