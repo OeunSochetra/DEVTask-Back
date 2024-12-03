@@ -26,8 +26,9 @@ app.use("/api", privacyPolicyRoute);
 
 app.get("/", (req: any, res: any) => res.send("Express on Vercel"));
 
-// Vercel expects an exported function
-export default (req: VercelRequest, res: VercelResponse) => {
-  const server = createServer(app);
-  server.emit("request", req, res);
-};
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+module.exports = app;
