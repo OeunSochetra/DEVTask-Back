@@ -1,7 +1,6 @@
 import express from "express";
 import { connectDB } from "./services/mongodb";
 import featureJobRoute from "./routes/featureJobRoute";
-import { VercelRequest, VercelResponse } from "@vercel/node";
 import spotlightRoute from "./routes/spotlightRoute";
 import programLangRoute from "./routes/programLangRoute";
 import BoardRoute from "./routes/boardRoute";
@@ -9,7 +8,6 @@ import mediaRoute from "./routes/mediaRoute";
 import privacyPolicyRoute from "./routes/privacyPolicyRoute";
 import cors from "cors";
 import dotenv from "dotenv";
-import { createServer } from "http";
 
 dotenv.config();
 connectDB();
