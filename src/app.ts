@@ -9,6 +9,7 @@ import mediaRoute from "./routes/mediaRoute";
 import privacyPolicyRoute from "./routes/privacyPolicyRoute";
 import cors from "cors";
 import dotenv from "dotenv";
+import { createServer } from "http";
 
 dotenv.config();
 connectDB();
@@ -29,3 +30,9 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// Vercel expects an exported function
+export default (req: VercelRequest, res: VercelResponse) => {
+  const server = createServer(app);
+  server.emit("request", req, res);
+};
