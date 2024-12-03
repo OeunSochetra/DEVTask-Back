@@ -10,17 +10,17 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
-connectDB();
+// connectDB();
 const app = express();
 app.use(express.json());
 app.use(cors()); // Use CORS middleware
 
-app.use("/api", featureJobRoute);
-app.use("/api", spotlightRoute);
-app.use("/api", programLangRoute);
-app.use("/api", BoardRoute);
-app.use("/api", mediaRoute);
-app.use("/api", privacyPolicyRoute);
+// app.use("/api", featureJobRoute);
+// app.use("/api", spotlightRoute);
+// app.use("/api", programLangRoute);
+// app.use("/api", BoardRoute);
+// app.use("/api", mediaRoute);
+// app.use("/api", privacyPolicyRoute);
 
 app.get("/", (req: any, res: any) => res.send("Express on Vercel"));
 
