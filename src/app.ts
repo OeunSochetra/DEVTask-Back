@@ -1,6 +1,7 @@
 import express from "express";
 import { connectDB } from "./services/mongodb";
 import featureJobRoute from "./routes/featureJobRoute";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 import spotlightRoute from "./routes/spotlightRoute";
 import programLangRoute from "./routes/programLangRoute";
 import BoardRoute from "./routes/boardRoute";
