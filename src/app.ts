@@ -23,6 +23,8 @@ app.use("/", BoardRoute);
 app.use("/", mediaRoute);
 app.use("/", privacyPolicyRoute);
 
+app.get("/", (req: any, res: any) => res.send("Express on Vercel"));
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
