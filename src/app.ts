@@ -16,12 +16,12 @@ const app = express();
 app.use(express.json());
 app.use(cors()); // Use CORS middleware
 
-app.use("/api", featureJobRoute);
-app.use("/api", spotlightRoute);
-app.use("/api", programLangRoute);
-app.use("/api", BoardRoute);
-app.use("/api", mediaRoute);
-app.use("/api", privacyPolicyRoute);
+app.use("/", featureJobRoute);
+app.use("/", spotlightRoute);
+app.use("/", programLangRoute);
+app.use("/", BoardRoute);
+app.use("/", mediaRoute);
+app.use("/", privacyPolicyRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
