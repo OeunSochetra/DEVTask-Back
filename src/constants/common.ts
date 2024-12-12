@@ -36,8 +36,6 @@ export interface IBoard extends Document {
 
 export interface IMedia extends Document {
   url: string;
-  fileType: string;
-  fileName: string;
 }
 
 export interface IPrivacyPolicy extends Document {

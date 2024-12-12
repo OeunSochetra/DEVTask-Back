@@ -1,39 +1,41 @@
 import { Request, Response } from "express";
+import upload from "../middlewares/upload";
 import Media from "../models/media.modal";
+import express from "express";
 
-export const createMedia = async (req: Request, res: Response) => {
-  const { url, fileType, fileName } = req.body;
-  try {
-    const newMedia = new Media({ url, fileType, fileName });
-    await newMedia.save();
-    res.status(201).json({
-      message: "success",
-      data: newMedia,
-      meta: {},
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "error",
-      data: {},
-      meta: error,
-    });
-  }
-};
+const router = express.Router();
 
-export const getMediaById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const media = await Media.findById(id);
-    res.status(200).json({
-      message: "success",
-      data: media,
-      meta: {},
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "error",
-      data: {},
-      meta: error,
-    });
+router.post(
+  "/media",
+  upload.single("image"),
+  async (req: any, res: Response) => {
+    try {
+      if (!req.file) {
+        res.status(400).json({ message: "No file uploaded" });
+      }
+
+      const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`;
+
+      const media = new Media({
+        url: imageUrl,
+      });
+      media.save();
+
+      res.status(201).json({
+        message: "success",
+        data: media,
+        meta: {},
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "error",
+        data: {},
+        meta: { errorDetails: (error as Error).message },
+      });
+    }
   }
-};
+);
+
+export default router;

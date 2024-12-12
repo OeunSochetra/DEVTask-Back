@@ -1,9 +1,8 @@
-import express from "express";
-import { createMedia, getMediaById } from "../controller/mediaController";
+// import express from "express";
+// import { createMedia } from "../controller/mediaController";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post("/media", createMedia);
-router.get("/media/:id", getMediaById);
+// router.post("/media", createMedia);
 
-export default router;
+// export default router;

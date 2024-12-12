@@ -3,9 +3,7 @@ import { IMedia } from "../constants/common";
 
 const MediaSchema = new Schema(
   {
-    url: { type: String, required: [true, "url is required"] },
-    fileType: { type: String, required: [true, "fileType is required"] },
-    fileName: { type: String, required: [true, "fileName is required"] },
+    url: { type: String, required: true },
   },
   { timestamps: true }
 );
