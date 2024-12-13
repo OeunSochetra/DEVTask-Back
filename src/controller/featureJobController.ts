@@ -48,14 +48,34 @@ export const createFeatureJob = async (req: Request, res: Response) => {
 
 export const getFeatureJobs = async (req: Request, res: Response) => {
   try {
-    const featureJobs = await FeatureJob.find()
+    const { page = 1, limit = 1, search = "" } = req.query;
+
+    const currentPage = parseInt(page as string, 10) || 1;
+    const pageSize = parseInt(limit as string, 10) || 1;
+    const searchQuery = search
+      ? { jobTitle: { $regex: search, $options: "i" } }
+      : {};
+
+    const totalFeatureJobs = await FeatureJob.countDocuments(searchQuery);
+
+    const featureJobs = await FeatureJob.find(searchQuery)
+      .skip((currentPage - 1) * pageSize)
+      .limit(pageSize)
       .populate("spotlightOption")
       .populate("categories")
       .exec();
+
+    const totalPages = Math.ceil(totalFeatureJobs / pageSize);
+
     res.status(200).json({
       message: "success",
       data: featureJobs,
-      meta: {},
+      meta: {
+        total: totalFeatureJobs,
+        page: currentPage,
+        pageSize: pageSize,
+        totalPages: totalPages,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -77,6 +97,28 @@ export const getFeatureJobById = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "success",
       data: featureJob,
+      meta: {},
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "error",
+      data: {},
+      meta: { errorDetails: (error as Error).message },
+    });
+  }
+};
+
+// find feature job by category
+
+export const getFeatureJobCategories = async (req: Request, res: Response) => {
+  try {
+    const categories = await FeatureJob.distinct("categories");
+
+    console.log("categories", categories);
+
+    res.status(200).json({
+      message: "success",
+      data: categories,
       meta: {},
     });
   } catch (error) {

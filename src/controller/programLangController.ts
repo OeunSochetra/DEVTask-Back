@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import ProgramLang from "../models/programLang.model";
+import FeatureJob from "../models/featureJob.model";
 
 export const createProgramLang = async (req: Request, res: Response) => {
   const { name } = req.body;
@@ -26,6 +27,26 @@ export const getProgramLangs = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "success",
       data: programLangs,
+      meta: {},
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "error",
+      data: {},
+      meta: { errorDetails: (error as Error).message },
+    });
+  }
+};
+
+// find all feature jobs that have a specific category
+
+export const getFeatureJobsByCategory = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const featureJobs = await FeatureJob.find({ categories: id });
+    res.status(200).json({
+      message: "success",
+      data: featureJobs,
       meta: {},
     });
   } catch (error) {
