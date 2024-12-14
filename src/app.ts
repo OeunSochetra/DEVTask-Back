@@ -4,6 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import path from "path";
+import CryptoJS from "crypto-js";
 
 import featureJobRoute from "./routes/featureJobRoute";
 import spotlightRoute from "./routes/spotlightRoute";
@@ -15,6 +16,9 @@ import mediaRoute from "./controller/mediaController";
 dotenv.config();
 connectDB();
 const app = express();
+// Secret key for encryption
+const SECRET_KEY = "my-very-secret-key";
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());

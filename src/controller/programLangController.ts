@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import ProgramLang from "../models/programLang.model";
 import FeatureJob from "../models/featureJob.model";
+import CryptoJS from "crypto-js";
+import dotenv from "dotenv";
+dotenv.config();
+
+const SECRET_KEY = process.env.MY_SECRET_KEY || "my-very-secret-key";
 
 export const createProgramLang = async (req: Request, res: Response) => {
   const { name } = req.body;
@@ -41,9 +46,12 @@ export const getProgramLangs = async (req: Request, res: Response) => {
 // find all feature jobs that have a specific category
 
 export const getFeatureJobsByCategory = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id, name } = req.params;
   try {
-    const featureJobs = await FeatureJob.find({ categories: id });
+    const featureJobs = await FeatureJob.find({
+      categories: id,
+    });
+
     res.status(200).json({
       message: "success",
       data: featureJobs,
